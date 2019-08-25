@@ -2,7 +2,7 @@
   <div id="guestbook">
     <h2 align="center">Please Sign our Guestbook</h2>
 
-    <b-form @submit.prevent="handleSubmit"> 
+    <b-form @submit.prevent="handleSubmit">
       <b-form-group label="Your Name">
         <b-form-input v-model="form.name"></b-form-input>
       </b-form-group>
@@ -23,7 +23,10 @@
         </b-tr>
       </b-thead>
       <b-tbody>
-        <b-tr v-for="GuestBookEntry in guestBookEntries" :key="GuestBookEntry.id">
+        <b-tr
+          v-for="GuestBookEntry in guestBookEntries"
+          :key="GuestBookEntry.id"
+        >
           <b-td>{{ GuestBookEntry.name }}</b-td>
           <b-td>{{ GuestBookEntry.message }}</b-td>
           <b-td>{{ GuestBookEntry.timeStamp }}</b-td>
@@ -37,62 +40,67 @@
 </template>
 
 <script>
-  export default {
-    name: 'guestbook',
+export default {
+  name: "guestbook",
 
-    data() {
-      return {
-        form: {
-          name: '',
-          message: '',
-        },
-        submitting: false,
-        guestBookEntries: []
+  data() {
+    return {
+      form: {
+        name: "",
+        message: ""
+      },
+      submitting: false,
+      guestBookEntries: []
+    };
+  },
+
+  mounted() {
+    this.getGuestBookEntries();
+  },
+
+  methods: {
+    handleSubmit() {
+      this.submitting = true;
+
+      this.addGuestBookEntry();
+
+      this.form = {
+        name: "",
+        message: ""
+      };
+      this.submitting = false;
+    },
+
+    async getGuestBookEntries() {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/GuestBookEntries/"
+        );
+        const data = await response.json();
+        this.guestBookEntries = data;
+      } catch (error) {
+        console.error(error);
       }
     },
-    
-    mounted() {
-      this.getGuestBookEntries()
-    },
 
-    methods: {
-      handleSubmit() {
-				this.submitting = true
-
-				this.addGuestBookEntry()
-
-				this.form = {
-					name: '',
-					message: '',
-				}
-				this.submitting = false
-			},
-
-      async getGuestBookEntries() {
-				try {
-					const response = await fetch('http://localhost:5000/api/GuestBookEntries/')
-					const data = await response.json()
-					this.guestBookEntries = data
-				} catch (error) {
-					console.error(error)
-				}
-      },
-      
-      async addGuestBookEntry() {
-				try {
-					const response = await fetch('http://localhost:5000/api/GuestBookEntries/', {
-						method: 'POST',
-						body: JSON.stringify(this.form),
-						headers: { 'Content-type': 'application/json; charset=UTF-8' },
-					})
-					const data = await response.json()
-					this.guestBookEntries = [...this.guestBookEntries, data]
-				} catch (error) {
-					console.error(error)
-				}
-			},
-    },
+    async addGuestBookEntry() {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/GuestBookEntries/",
+          {
+            method: "POST",
+            body: JSON.stringify(this.form),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+          }
+        );
+        const data = await response.json();
+        this.guestBookEntries = [...this.guestBookEntries, data];
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
+};
 </script>
 
 <style scoped></style>
