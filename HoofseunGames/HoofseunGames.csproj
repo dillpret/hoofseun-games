@@ -24,13 +24,25 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.17" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="8.0.17" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
     <PackageReference Include="VueCliMiddleware" Version="2.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="CoinChaser\**" />
+    <Compile Remove="Core\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="CoinChaser\**" />
+    <Content Remove="Core\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="CoinChaser\**" />
+    <EmbeddedResource Remove="Core\**" />
+    <None Remove="CoinChaser\**" />
+    <None Remove="Core\**" />
   </ItemGroup>
 
   <ItemGroup>

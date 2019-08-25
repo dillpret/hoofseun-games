@@ -1,9 +1,10 @@
-using HoofseunGames.DataAccess.CoinChaser.Repositories;
+using HoofseunGames.GuestBook.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using VueCliMiddleware;
 
 namespace HoofseunGames
@@ -28,8 +29,7 @@ namespace HoofseunGames
 				configuration.RootPath = "ClientApp/dist";
 			});
 
-			services.AddTransient<GuestBook.DataAccess.DatabaseContext, GuestBook.DataAccess.DatabaseContext>();
-			services.AddTransient<ScoreEntryRepository, ScoreEntryRepository>();
+			services.AddTransient<GuestBookDbContext, GuestBookDbContext>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +69,13 @@ namespace HoofseunGames
 					// spa.UseProxyToSpaDevelopmentServer("http://localhost:8080"); // your Vue app port
 				}
 			});
+
+			using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+			{
+				var context = serviceScope.ServiceProvider.GetRequiredService<GuestBookDbContext>();
+				context.Database.EnsureCreated();
+				Console.WriteLine("Guestbook database ensured.");
+			}
 		}
 	}
 }

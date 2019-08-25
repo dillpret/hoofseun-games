@@ -12,9 +12,9 @@ namespace HoofseunGames.GuestBook.API
 	[ApiController]
 	public class GuestBookEntriesController : ControllerBase
 	{
-		private readonly DatabaseContext _context;
+		private readonly GuestBookDbContext _context;
 
-		public GuestBookEntriesController(DatabaseContext context)
+		public GuestBookEntriesController(GuestBookDbContext context)
 		{
 			_context = context;
 		}

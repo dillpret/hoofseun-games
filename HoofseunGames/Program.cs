@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using System;
 
 namespace HoofseunGames
 {
@@ -8,12 +7,6 @@ namespace HoofseunGames
 	{
 		public static void Main(string[] args)
 		{
-			using (var context = new GuestBook.DataAccess.DatabaseContext())
-			{
-				context.Database.EnsureCreated();
-				Console.WriteLine("Database ensured.");
-			}
-
 			CreateWebHostBuilder(args).Build().Run();
 		}
 
