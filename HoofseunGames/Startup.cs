@@ -46,6 +46,7 @@ namespace HoofseunGames
 				app.UseHttpsRedirection();
 			}
 
+			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseSpaStaticFiles();
 

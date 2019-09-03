@@ -3,8 +3,8 @@
     <Navbar />
     <h1 align="center">Welcome to Hoofseun Games</h1>
     <b-img
-      width=100
-      height=100
+      width="100"
+      height="100"
       center
       :src="require('@/assets/hoofseun-games-logo.png')"
       fluid

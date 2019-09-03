@@ -19,5 +19,9 @@ module.exports = {
 
         return options;
       });
-  }
+    },
+
+    devServer: {
+        proxy: 'http://localhost:5000'
+    },
 };

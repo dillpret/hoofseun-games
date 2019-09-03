@@ -74,7 +74,7 @@ export default {
     async getGuestBookEntries() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/GuestBookEntries/"
+          process.env.VUE_APP_DOMAIN_NAME+"/api/GuestBookEntries/"
         );
         const data = await response.json();
         this.guestBookEntries = data;
@@ -86,7 +86,7 @@ export default {
     async addGuestBookEntry() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/GuestBookEntries/",
+          process.env.VUE_APP_DOMAIN_NAME+"/api/GuestBookEntries/",
           {
             method: "POST",
             body: JSON.stringify(this.form),
