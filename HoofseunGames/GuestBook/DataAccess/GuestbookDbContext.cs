@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using System;
 
 namespace HoofseunGames.GuestBook.DataAccess
 {
@@ -10,13 +8,16 @@ namespace HoofseunGames.GuestBook.DataAccess
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseMySql("server=localhost;database=HoofGaems;user=HoofGaems;password=pigdeath42",
-					mySqlOptions =>
-					{
-						mySqlOptions
-							.ServerVersion(new Version(8, 0, 16), ServerType.MySql)
-							.DisableBackslashEscaping();
-					});
+			//optionsBuilder.UseMySql("server=localhost;database=HoofGaems;user=HoofGaems;password=pigdeath42",
+			//		mySqlOptions =>
+			//		{
+			//			mySqlOptions
+			//				.ServerVersion(new Version(8, 0, 16), ServerType.MySql)
+			//				.DisableBackslashEscaping();
+			//		});
+
+			optionsBuilder
+				.UseSqlite(@"Data Source=Guestbook.db;");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

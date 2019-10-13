@@ -13,7 +13,7 @@ namespace HoofseunGames
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
 				.UseUrls("http://0.0.0.0:5000/")
-				.UseSetting("https_port", "8080")
+				.UseSetting("https_port", "5000")
 				.UseStartup<Startup>();
 	}
 }
